@@ -303,3 +303,33 @@ public class Ocak{
         }
         return false;
     }
+
+    public static int birdenSonra(int n, int b){
+        String s=Integer.toString(n);
+        s=s.substring(b);
+        return Integer.parseInt(s);
+    }
+    public static int ilkParça(int n, int ilk){
+        return Integer.parseInt(Integer.toString(n).substring(0,ilk));
+    }
+
+    public static boolean sıralıAsallıMı(int n, int küçük){
+        if(isAsal(n)) return true;
+        int length=Integer.toString(n).length();
+        for (int i = 1; i <= length; i++) {
+            int ilkParça=ilkParça(n, i);
+            if(ilkParça>küçük){
+            if(isAsal(ilkParça)){
+                int m=birdenSonra(n, i);
+                return sıralıAsallıMı(m, ilkParça);
+            }
+        }
+        }
+        return false;
+    }
+
+
+
+
+
+}
