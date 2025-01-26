@@ -173,3 +173,133 @@ public class Ocak{
         // System.out.println(denemeall(deneme));
         
     }
+
+    public static int LetterToNumber(char c){
+        switch (c) {
+            case 'a':
+            return 1;
+            case 'b':
+            return 2;
+            case 'c':
+            return 3;
+            case 'ç':
+            return 4;
+            case 'd':
+            return 5;
+            case 'e':
+            return 6;
+            case 'f':
+            return 7;
+            case 'g':
+            return 8;
+            case 'ğ':
+            return 9;
+            case 'h':
+            return 10;
+            case 'ı':
+            return 11;
+            case 'i':
+            return 12;
+            case 'j':
+            return 13;
+            case 'k':
+            return 14;
+            case 'l':
+            return 15;
+            case 'm':
+            return 16;
+            case 'n':
+            return 17;
+            case 'o':
+            return 18;
+            case 'ö':
+            return 19;
+            case 'p':
+            return 20;
+            case 'r':
+            return 21;
+            case 's':
+            return 22;
+            case 'ş':
+            return 23;
+            case 't':
+            return 24;
+            case 'u':
+            return 25;
+            case 'ü':
+            return 26;
+            case 'v':
+            return 27;
+            case 'y':
+            return 28;
+            case 'z':
+            return 29;
+        }
+        return 0;
+    }
+    public static String CityOfNumber(int n, HashMap<Integer, String> plakaSehirMap){
+            return plakaSehirMap.get(n);
+    }
+
+    public static int denemeall(int[] deneme){
+        int[] find= new int[6];
+        
+        for (int i = 10; i < 200; i++) {
+            for (int j = 0; j < 6; j++) {
+                find[j]=modM(deneme[j], i);
+            }
+            if(theSame(find)) return i;
+        }
+        return -1;
+    }
+
+    public static boolean theSame(int[] arr){
+        int first=arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if(arr[i]!=first) return false;
+            first=arr[i];
+        }
+        return true;
+    }
+
+    public static List<String> listOfCities(HashMap<Integer, String> plakaSehirMap){
+        ArrayList<String> list= new ArrayList<>();
+        for (String string : plakaSehirMap.values()) {
+            int last=string.length()-1;
+            int total=0;
+            for (int i = 0; i < 3; i++) {
+                total+=LetterToNumber(string.charAt(last));
+                last--;
+            }
+            //System.out.println(string+" : "+CityOfNumber(total-3, plakaSehirMap));
+            if(CityOfNumber(total-3, plakaSehirMap)==string)
+                list.add(string);
+        }
+        return list;
+    }
+
+    public static int modM(int n, int m){
+        return n%m;
+    }
+
+    public static boolean isAsal(int n){
+        if(n<2) return false;
+        if(n<4) return true;
+        double sqrt=Math.sqrt(n);
+        for(int i=2; i<sqrt;i++){
+            if(n%i==0) return false;
+        }
+        return true;
+    }
+
+    public static boolean asallıMı(int n){
+        if(isAsal(n)) return true;
+        int length=Integer.toString(n).length();
+        for (int i = 1; i <= length; i++) {
+            if(isAsal(ilkParça(n, i))){
+                int m=birdenSonra(n, i);
+                return asallıMı(m);
+            }
+        }
+        return false;
+    }
