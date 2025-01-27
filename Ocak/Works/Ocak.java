@@ -1,10 +1,6 @@
-import java.io.File;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Scanner;
 
 public class Ocak{
     public static void main(String[] args) {
@@ -135,7 +131,7 @@ public class Ocak{
         // // }
             
         // } catch (Exception e) {
-        //     // TODO: handle exception
+        //   
         // } 
 
         // for (var character : listC.entrySet()) {
