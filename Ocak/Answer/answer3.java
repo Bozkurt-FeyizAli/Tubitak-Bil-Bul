@@ -2,12 +2,13 @@ import java.math.BigInteger;
 
 public class answer3{
     public static void main(String[] args) {
+        BigInteger number= new BigInteger("12345678910987654321");
         System.out.println("asallı mı:");
-        System.out.println(forLong.asallıMı(19051919, 19051919));
+        System.out.println(forBigInteger.asallıMı(number, number));
         System.out.println("sıralı asallı mı:");
-        System.out.println(forLong.sıralıAsallıMı(19051919, 0, 19051919));
+        System.out.println(forBigInteger.sıralıAsallıMı(number, BigInteger.ZERO, number));
         System.out.println("asal mı:");
-        System.out.println(forLong.AsalMı(19051919));
+        System.out.println(forBigInteger.AsalMı(number));
     
     }
 
@@ -80,7 +81,7 @@ class forLong{
 
     public static boolean asallıMı(long n, long original){
         if(AsalMı(n)&&n!=original) {
-        System.out.println(n);
+        //System.out.println(n);
             return true;
         }
         int length=Long.toString(n).length();
@@ -88,7 +89,7 @@ class forLong{
             if(Long.toString(n).charAt(i)=='0')
                 continue;
             if(AsalMı(ilkParça(n, i))){
-                System.out.print(ilkParça(n,i)+" || "); // for documantatiomn
+                //System.out.print(ilkParça(n,i)+" || "); // for documantatiomn
                 int m=birdenSonra(n, i);
                 return asallıMı(m, original);
             }
@@ -117,7 +118,7 @@ class forLong{
                 continue;
             if(ilkParça>küçük){
             if(AsalMı(ilkParça)){
-                System.out.print(ilkParça+" || "); // for documantatiomn
+                //System.out.print(ilkParça+" || "); // for documantatiomn
                 int m=birdenSonra(n, i);
                 return sıralıAsallıMı(m, ilkParça, original);
             }
@@ -139,16 +140,23 @@ class forBigInteger{
     }
 
     public static boolean asallıMı(BigInteger n, BigInteger original) {
-        if (AsalMı(n)&&n!=original) return true;
+        if (AsalMı(n)&&n!=original) {
+            System.out.print(n.toString()+" || ");// for documantatio
+            return true;
+        }
         String numStr = n.toString();
-        int length = numStr.length();
+        int length = numStr.length()-1;
         for (int i = 1; i <= length; i++) {
             BigInteger ilkParça = ilkParça(n, i);
+            if(numStr.charAt(i)=='0')
+                continue;
             if (AsalMı(ilkParça)) {
+                System.out.println(ilkParça.toString()+" || "); // for documantation
                 BigInteger kalan = birdenSonra(n, i);
                 return asallıMı(kalan, original);
             }
         }
+        System.out.println(n.toString());
         return false;
     }
 
@@ -166,20 +174,27 @@ class forBigInteger{
     }
 
     public static boolean sıralıAsallıMı(BigInteger n, BigInteger küçük, BigInteger original) {
-        if (AsalMı(n)&&n!=original)
-         return true;
+        if (AsalMı(n)&&n!=original){
+            //System.out.println(n.toString()+" || "); // for documantatio
+            return true;
+        }
         String numStr = n.toString();
-        int length = numStr.length();
+        int length = numStr.length()-1;
         for (int i = 1; i <= length; i++) {
             BigInteger ilkParça = ilkParça(n, i);
+        
+            if(numStr.charAt(i)=='0')
+                continue;
             if (ilkParça.compareTo(küçük) > 0) {
                 if (AsalMı(ilkParça)) {
+                   // System.out.println(ilkParça.toString()+" || "); // for documantatio
                     BigInteger kalan = birdenSonra(n, i);
                     küçük=ilkParça;
                     return sıralıAsallıMı(kalan, ilkParça, original);
                 }
             }
         }
+        System.out.println(n.toString());
         return false;
     }
 
