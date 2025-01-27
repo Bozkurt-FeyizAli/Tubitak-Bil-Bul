@@ -2,8 +2,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.swing.text.StyledEditorKit.BoldAction;
-
 public class fifth{
     public static void main(String[] args) {
         List<List<Integer>> lists= Arrays.asList(
