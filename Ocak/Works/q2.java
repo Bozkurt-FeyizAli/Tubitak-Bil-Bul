@@ -24,11 +24,12 @@ public class q2 {
                 
 
             }
+            reader.close();
 
         }
             
         } catch (Exception e) {
-            // TODO: handle exception
+            
         } 
 
 
@@ -37,5 +38,6 @@ public class q2 {
         }
 
         System.out.println(listC.size());
+        
     }
 }
