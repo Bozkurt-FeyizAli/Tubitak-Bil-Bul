@@ -2,13 +2,13 @@ import java.math.BigInteger;
 
 public class answer3{
     public static void main(String[] args) {
-        BigInteger number= new BigInteger("12345678910987654321");
-        System.out.println("asallı mı:");
-        System.out.println(forBigInteger.asallıMı(number, number));
-        System.out.println("sıralı asallı mı:");
-        System.out.println(forBigInteger.sıralıAsallıMı(number, BigInteger.ZERO, number));
-        System.out.println("asal mı:");
-        System.out.println(forBigInteger.AsalMı(number));
+        // BigInteger number= new BigInteger("12345678910987654321");
+        // System.out.println("asallı mı:");
+        // System.out.println(forBigInteger.asallıMı(number, number));
+        // System.out.println("sıralı asallı mı:");
+        // System.out.println(forBigInteger.sıralıAsallıMı(number, BigInteger.ZERO, number));
+        // System.out.println("asal mı:");
+        // System.out.println(forBigInteger.AsalMı(number));
     
     }
 
