@@ -126,3 +126,73 @@ public class Answer2 {
             arr[row][0] = emp;
         }
     }
+
+    public static void rotateRightinRow(int[][] arr, int row, int ti) {
+        // ti kadar döndürme işlemi yapılacak (satır sağa kaydırma)
+        for (int i = 0; i < ti; i++) {
+            // Satırın son elemanını sakla
+            int emp = arr[row][arr[row].length - 1];
+            
+            // Satırdaki elemanları bir sağa kaydır
+            for (int j = arr[row].length - 1; j > 0; j--) {
+                arr[row][j] = arr[row][j - 1];
+            }
+            
+            // İlk sıraya, sakladığımız son elemanı yerleştir
+            arr[row][0] = emp;
+        }
+    }
+
+    //
+
+    public static void aNumbertimes(char[][] arr, String ti){
+        
+        int i=0;
+        for (char c: ti.toCharArray()) {
+            rotateDowninColoumn(arr, i, c-48);
+            i++;
+        }
+    }
+
+    public static void rotateDowninColoumn(char[][] arr, int col, int ti) { 
+        // ti kadar döndürme işlemi yapılacak
+        for (int i = 0; i < ti; i++) {
+            // Sütunun son elemanını sakla
+            char emp = arr[arr.length - 1][col];
+            
+            // Sütundaki elemanları bir aşağı kaydır
+            for (int j = arr.length - 1; j > 0; j--) {
+                arr[j][col] = arr[j - 1][col];  // Bir önceki satırı geçerli satıra taşı
+            }
+            
+            // İlk sıraya, sakladığımız son elemanı yerleştir
+            arr[0][col] = emp;
+        }
+    }
+
+    
+
+    public static void rotateUpinColoumn(char[][] arr, int col, int ti) { 
+        // ti kadar döndürme işlemi yapılacak (sütunları yukarı kaydırma)
+        for (int i = 0; i < ti; i++) {
+            // Sütunun ilk elemanını sakla
+            char emp = arr[0][col];
+            
+            // Sütundaki elemanları bir yukarı kaydır
+            for (int j = 0; j < arr.length - 1; j++) {
+                arr[j][col] = arr[j + 1][col];  // Bir sonraki satırı geçerli satıra taşı
+            }
+            
+            // Son sıraya, sakladığımız ilk elemanı yerleştir
+            arr[arr.length - 1][col] = emp;
+        }
+    }
+
+    public static void aNumbertimesRow(char[][] arr, String ti){
+        
+        int i=0;
+        for (char c: ti.toCharArray()) {
+            rotateRow(arr, i, c-48);
+            i++;
+        }
+    }
