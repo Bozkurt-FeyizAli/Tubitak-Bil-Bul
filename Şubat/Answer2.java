@@ -1,9 +1,11 @@
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Answer2 {
     public static void main(String[] args) {
+        
         // char[][] arr = new char[11][11];
         // String s ="TIRALUROSMİEAAYMABFATLKDDABABİSLİNAOGTETFEABONLAAIYÖMDEFAMNŞFAKTAREŞANKADİNNFSASUŞSİNİAİTKIKABAKÇHŞTİRPAŞASEYMÜBİTAKBİLGE";
 
@@ -57,39 +59,122 @@ public class Answer2 {
         //     }
         //     System.out.println();
         // }
+        /*
+         * 05011922  68
+1923  9
+19051919  54
+30111973  49
+23041920  5
+?
+1071  39
+4815162342  35
+         */
+        ŞifreSonuç[] şifreler= {
+            new ŞifreSonuç("05011922", 68),
+            new ŞifreSonuç("1923", 9),
+            new ŞifreSonuç("19051919", 54),
+            new ŞifreSonuç("30111973", 49),
+            //new ŞifreSonuç("23041920", 50),
+            new ŞifreSonuç("1071", 39),
+            new ŞifreSonuç("4815162342", 35)
+        };
+        
         
         String[] words={"Teknofest" , //
                         "Tübitakbilgem" , //
                         "Şifrebilimsoruları" , //
-                        "Adana" , //
-                        "Şakirpaşa" , //
-                        "seyhan" , //
-                        "Adaltaf" , //
+                        "AdanaŞakirpaşa" , //
+                        //
+                        "seyhanAdaltaf" , //
+                        //
                         "bamyadolması" , //
                         "kabakçintmesi" ,//
                         "babagannuş" , //
                         "siniköfte" , //
-                        "taşkadayıf"};
-        String s= words[8];
-        char[] c=s.toCharArray();
-        int[] arr= new int[c.length];
-        for (int i = 0; i < arr.length; i++) {
-            arr[i]=LetterToNumber(c[i])-1;
-        }
-        ötele(arr, "05011922");
+                        "taşkadayıf"
+                    };
+                    for (int i = 0; i < words.length; i++) {
+                        words[i] = words[i].toLowerCase();
+                    }
+                    
+        for (ŞifreSonuç şifreSonuç : sonuçVarMıKelime(words[6], şifreler)) {
+            System.out.println(şifreSonuç);
+        }             
+        
+        // String s= words[9];
+        // System.out.println(words[8]);
+        // char[] c=s.toCharArray();
+        // int[] arr= new int[c.length];
+        // for (int i = 0; i < arr.length; i++) {
+        //     arr[i]=HarfSayiDonusum.harfToSayi(c[i]);
+        // }
+        // ötele(arr, "19051919");
 
-        for (int i : arr) {
-            System.out.println(i);
-        }
-        ArrayList<Integer> subset= new ArrayList<>();
+        // for (int i : arr) {
+        //     System.out.println(i);
+        // }
+        // ArrayList<Integer> subset= new ArrayList<>();
 
         
-        System.out.println(isArrange(arr, 68, subset, 0));
-        for (int iterable_element : subset) {
-            System.out.println(iterable_element);
+        // System.out.println(isArrange(arr, 54, subset, 0));
+        // for (int iterable_element : subset) {
+        //     System.out.println(iterable_element);
+        // }
+        // for (int iterable_element : subset) {
+        //     System.out.println(HarfSayiDonusum.sayiToHarf(iterable_element));
+        // }
+        
+
+        System.out.println(sonuçVarMı(words, şifreler));
+
+
+    }
+
+    public static boolean ilkNdeToplamıVarMı(int[] arr, int index, int res){
+        if(index<0||index>=arr.length) return false;
+        if(arr[index]>res) return false;
+        if(arr[index]==res) return true;
+        res-=arr[index];
+        return ilkNdeToplamıVarMı(arr, index+1, res);
+    }
+    public static ArrayList<ŞifreSonuç> sonuçVarMıKelime(String word, ŞifreSonuç[] şifreSonuçs){
+        ArrayList<ŞifreSonuç> results= new ArrayList<>();
+        for (ŞifreSonuç şifreSonuç : şifreSonuçs) {
+            char[] c=word.toCharArray();
+                int[] arr=new int[c.length];
+                for (int i = 0; i < arr.length; i++) {
+                    arr[i]=HarfSayiDonusum.harfToSayi(c[i]);
+                }
+                ötele(arr, şifreSonuç.şifre);
+                if(ilkNdeToplamıVarMı(arr, 0, şifreSonuç.sonuç)) results.add(şifreSonuç);
         }
+        return results;
+    }
 
 
+    public static boolean sonuçVarMı(String[] words, ŞifreSonuç[] şifreSonuçs){
+        if(şifreSonuçs.length==0) return true;
+        for (ŞifreSonuç şifreSonuç : şifreSonuçs) {
+            for (String word : words) {
+                char[] c=word.toCharArray();
+                int[] arr=new int[c.length];
+                for (int i = 0; i < arr.length; i++) {
+                    arr[i]=HarfSayiDonusum.harfToSayi(c[i]);
+                }
+                ötele(arr, şifreSonuç.şifre);
+                if(ilkNdeToplamıVarMı(arr, 0, şifreSonuç.sonuç)){
+                    List<String> wordss = new ArrayList<>(Arrays.asList(words));
+                    wordss.remove(word);
+                    List<ŞifreSonuç> şifreSonuçss = new ArrayList<>(Arrays.asList(şifreSonuçs));
+                    şifreSonuçss.remove(şifreSonuç);
+                    return sonuçVarMı(
+                        wordss.toArray(new String[0]), 
+                        şifreSonuçss.toArray(new ŞifreSonuç[0])
+                                    );
+                }
+            }
+        }
+        return false;
     }
 
     public static boolean isArrange(int[] arr, int res, List<Integer> subset, int index) {
