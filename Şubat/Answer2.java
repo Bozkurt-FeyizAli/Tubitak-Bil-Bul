@@ -200,6 +200,7 @@ public class Answer2 {
     }
 
     public static void ötele(int[] arr, String s){
+        if(s.length()>arr.length) return;
         int i=0;
         for (char si : s.toCharArray()) {
             arr[i]=arr[i]+si-48;
@@ -402,68 +403,105 @@ public class Answer2 {
         }
     }
 
-    public static int LetterToNumber(char c){
-        c=Character.toLowerCase(c);
-        switch (c) {
-            case 'a':
-            return 1;
-            case 'b':
-            return 2;
-            case 'c':
-            return 3;
-            case 'ç':
-            return 4;
-            case 'd':
-            return 5;
-            case 'e':
-            return 6;
-            case 'f':
-            return 7;
-            case 'g':
-            return 8;
-            case 'ğ':
-            return 9;
-            case 'h':
-            return 10;
-            case 'ı':
-            return 11;
-            case 'i':
-            return 12;
-            case 'j':
-            return 13;
-            case 'k':
-            return 14;
-            case 'l':
-            return 15;
-            case 'm':
-            return 16;
-            case 'n':
-            return 17;
-            case 'o':
-            return 18;
-            case 'ö':
-            return 19;
-            case 'p':
-            return 20;
-            case 'r':
-            return 21;
-            case 's':
-            return 22;
-            case 'ş':
-            return 23;
-            case 't':
-            return 24;
-            case 'u':
-            return 25;
-            case 'ü':
-            return 26;
-            case 'v':
-            return 27;
-            case 'y':
-            return 28;
-            case 'z':
-            return 29;
-        }
-        return 0;
-    }
+    // public static int LetterToNumber(char c){
+    //     c=Character.toLowerCase(c);
+    //     switch (c) {
+    //         case 'a':
+    //         return 1;
+    //         case 'b':
+    //         return 2;
+    //         case 'c':
+    //         return 3;
+    //         case 'ç':
+    //         return 4;
+    //         case 'd':
+    //         return 5;
+    //         case 'e':
+    //         return 6;
+    //         case 'f':
+    //         return 7;
+    //         case 'g':
+    //         return 8;
+    //         case 'ğ':
+    //         return 9;
+    //         case 'h':
+    //         return 10;
+    //         case 'ı':
+    //         return 11;
+    //         case 'i':
+    //         return 12;
+    //         case 'j':
+    //         return 13;
+    //         case 'k':
+    //         return 14;
+    //         case 'l':
+    //         return 15;
+    //         case 'm':
+    //         return 16;
+    //         case 'n':
+    //         return 17;
+    //         case 'o':
+    //         return 18;
+    //         case 'ö':
+    //         return 19;
+    //         case 'p':
+    //         return 20;
+    //         case 'r':
+    //         return 21;
+    //         case 's':
+    //         return 22;
+    //         case 'ş':
+    //         return 23;
+    //         case 't':
+    //         return 24;
+    //         case 'u':
+    //         return 25;
+    //         case 'ü':
+    //         return 26;
+    //         case 'v':
+    //         return 27;
+    //         case 'y':
+    //         return 28;
+    //         case 'z':
+    //         return 29;
+    //     }
+    //     return 0;
+    // }
 }
+
+class ŞifreSonuç{
+    String şifre;
+    int sonuç;
+    public ŞifreSonuç(String şifre, int sonuç) {
+        this.şifre = şifre;
+        this.sonuç = sonuç;
+    }
+
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return şifre+" "+Integer.toString(sonuç) ;
+    }
+    
+}
+
+
+class HarfSayiDonusum {
+    
+    // Türk alfabesindeki harflerin sırası
+    private static final String ALFABE = "abcçdefgğhıijklmnoöprsştuüvyz";
+
+    // Sayıyı harfe dönüştürme fonksiyonu
+    public static char sayiToHarf(int sayi) {
+        return ALFABE.charAt(sayi);
+    }
+
+    // Harfi sayıya dönüştürme fonksiyonu
+    public static int harfToSayi(char harf) {
+        harf=Character.toLowerCase(harf);
+        return ALFABE.indexOf(harf);
+    }
+
+
+}
+
