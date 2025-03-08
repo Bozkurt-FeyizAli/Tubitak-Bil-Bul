@@ -1,3 +1,102 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Answer2_4 {
+    public static void main(String[] args) {
+        ŞifreSonuç[] şifreler = {
+            new ŞifreSonuç("05011922", 68), // 4-8, 2-4, 1-12 
+            new ŞifreSonuç("1923", 9),
+            new ŞifreSonuç("19051919", 54),
+            new ŞifreSonuç("30111973", 49),
+            new ŞifreSonuç("1071", 39),
+            new ŞifreSonuç("4815162342", 35)
+        };
+
+        String[] words = {
+            "Teknofest", // 9 
+            "Tübitakbilgem", //13
+            "Şifrebilimsoruları", //18
+            "Adana", // 5
+            "Şakirpaşa", // 9
+            "seyhan",  // 6
+            "Adaltaf", // 7
+            "bamyadolması", // 12
+            "kabakçintmesi", // 13
+            "babagannuş", // 10
+            "siniköfte", // 9
+            "taşkadayıf" // 10
+        };
+
+        HashMap<String, ŞifreSonuç> table= new HashMap<>();
+
+        for (String string : words) {
+            for (ŞifreSonuç şs : şifreler) {
+                if(sonuçVarMıKelime(string, şs))
+                    table.put(string, şs);
+            }
+        }
+
+        for (var t : table.entrySet()) {
+            System.out.println(t.getKey()+", "+t.getValue() );
+        }
+    }
+
+    public static int indexSum(int[] arr, String indexes, int sum){
+        if(arr.length<10){
+            int[] temp=new int[arr.length*2];
+            for (int i = 0, j=arr.length; i < arr.length; i++, j++) {
+                temp[i]=arr[i];
+                temp[j]=arr[i];
+            }
+            arr=temp;
+        }
+        int res=0;
+        while(indexes.length()>0){
+        int index=(int)indexes.charAt(0)-48;
+        if(res==sum) return 0;
+        res+=arr[index];
+        indexes=indexes.substring(1);
+        }
+        
+        return res- sum;
+    }
+
+    public static int[] stringtoArr(String s){
+        char[] c=s.toCharArray();
+        int[] arr= new int[c.length];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i]=HarfSayiDonusum.harfToSayi(c[i]);
+        }
+        return arr;
+    }
+
+    public static boolean sonuçVarMıKelime(String word, ŞifreSonuç şifreSonuç){
+        int[] arr= stringtoArr(word);
+        ötele(arr, şifreSonuç.şifre);
+        //return baştanSondanToplamıVarMı(arr, 0, arr.length-1, şifreSonuç.sonuç, true);
+        return checkStartEndSubset(arr, şifreSonuç.sonuç);
+    }
+    public static void ötele(int[] arr, String s){
+        if(s.length()>arr.length) return;
+        int i=0;
+        for (char si : s.toCharArray()) {
+            arr[i]=arr[i]+si-48;
+            if(arr[i]>28) arr[i]-=28;
+            i++;
+        }
+    }
+
+    public static void ötele2(int[] arr, String s){
+        if(s.length()>arr.length) return;
+        if(s.length()<arr.length){
+            while(s.length()<arr.length)
+                s+=s;
+            s=s.substring(0, arr.length);
+        }
+        else if(arr.length<s.length()){
+            int[] arr1= new int[s.length()];
+            for (int i = 0, j=0; i < arr1.length; i++, j++) {
+                if(j==arr.length) j=0;
                 arr1[i]=arr[j];
             } 
             arr=arr1;
